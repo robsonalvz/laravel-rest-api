@@ -51,7 +51,7 @@ class ProductController extends Controller
     public function delete(Product $id){
         try{
             $id->delete();
-            return response()->json(['data'=>['msg'=>'Produto: ' . $id->name . ' removido com sucesso!'],200]);
+            return response()->json(['data'=>['msg'=>'Produto: ' . $id->name . ' removido com sucesso!']],200);
         }catch(\Exception $e){
             if (config('app.debug')){
                 return response()->json(ApiError::errorMessage($e->getMessage(),1012));
