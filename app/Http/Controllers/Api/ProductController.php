@@ -21,5 +21,6 @@ class ProductController extends Controller
     }
     public function store(Request $request){
         $productData = $request->all();
+        $this->product->create($productData);
     }
 }
