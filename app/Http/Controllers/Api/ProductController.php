@@ -33,4 +33,18 @@ class ProductController extends Controller
             return response()->json(ApiError::errorMessage('Houve um erro ao realizar a operação',1010));
         }
     }
+    public function update(Request $request, $id){
+        try{
+            $productData = $request->all();
+            $product = $this->product->find($id);
+            $product->update($productData);
+            $return = ['data'=>['msg' =>'Produto atualizado com sucesso']];
+            return response()->json($return,201);
+        } catch(\Exception $e){
+            if (config('app.debug')){
+                return response()->json(ApiError::errorMessage($e->getMessage(),1010));
+            }
+            return response()->json(ApiError::errorMessage('Houve um erro ao realizar a operação',1010));
+        }
+    }
 }
