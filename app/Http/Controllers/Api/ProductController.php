@@ -42,9 +42,21 @@ class ProductController extends Controller
             return response()->json($return,201);
         } catch(\Exception $e){
             if (config('app.debug')){
-                return response()->json(ApiError::errorMessage($e->getMessage(),1010));
+                return response()->json(ApiError::errorMessage($e->getMessage(),1011));
             }
-            return response()->json(ApiError::errorMessage('Houve um erro ao realizar a operação',1010));
+            return response()->json(ApiError::errorMessage('Houve um erro ao realizar a operação de atualizar',1011));
+        }
+    }
+
+    public function delete(Product $id){
+        try{
+            $id->delete();
+            return response()->json(['data'=>['msg'=>'Produto: ' . $id->name . ' removido com sucesso!'],200]);
+        }catch(\Exception $e){
+            if (config('app.debug')){
+                return response()->json(ApiError::errorMessage($e->getMessage(),1012));
+            }
+            return response()->json(ApiError::errorMessage('Houve um erro ao realizar a operação de deletar',1012));
         }
     }
 }
