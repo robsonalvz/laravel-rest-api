@@ -14,7 +14,7 @@ class ProductController extends Controller
         $this->product = $product;
     }
     public function index(){
-        $data = ['data', $this->product->all()];
+        $data = $this->product->all();
         return response()->json($data);
     }
     public function show(Product $id){
